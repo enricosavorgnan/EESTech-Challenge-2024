@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card" style="max-width:900px;text-align:left;">
+  <h1 style="margin-bottom:1.25rem;">📊 Events Log</h1>
+  <p style="margin-bottom:1rem;color:#9ca3af;font-size:0.875rem;">
+    Experiment ID: <strong style="color:#a78bfa;">3</strong> &mdash;
+    <em>Add welcome text for conversion</em>
+  </p>
+  {% if events %}
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr>
+          <th>Timestamp</th>
+          <th>Event</th>
+          <th>Segment</th>
+          <th>User ID</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for e in events | reverse %}
+        <tr>
+          <td>{{ e.timestamp }}</td>
+          <td>{{ e.event_id }}</td>
+          <td>{{ e.segment_id }}</td>
+          <td style="font-size:0.75rem;color:#6b7280;">{{ e.user_id }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <p style="margin-top:1rem;color:#6b7280;font-size:0.8rem;">
+    Metric formula: COUNT(recording_start_click) / COUNT(recording_start_view)
+  </p>
+  {% else %}
+  <p style="color:#6b7280;">No events recorded yet. Visit the assistant to generate events.</p>
+  {% endif %}
+</div>
+{% endblock %}
